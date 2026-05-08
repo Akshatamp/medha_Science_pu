@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
+
+@layer base {
+  :root {
+    /* Scholars Pride — Modern Academic palette */
+    --background: 0 0% 100%;            /* pure white */
+    --foreground: 0 0% 13%;             /* #212121 dark gray text */
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 13%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 13%;
+
+    --primary: 231 64% 30%;             /* #1A237E Royal Blue */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 65% 51%;             /* #D32F2F Vibrant Red */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 25% 96%;               /* very light blue tint */
+    --muted-foreground: 220 10% 40%;
+
+    --accent: 45 96% 58%;               /* #FBC02D Golden Yellow */
+    --accent-foreground: 0 0% 13%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 231 64% 30%;
+
+    --radius: 0.625rem;
+
+    --highlight: 45 96% 58%;            /* gold for topper highlights */
+    --highlight-foreground: 0 0% 13%;
+
+    --navbar: 231 64% 30%;              /* Royal Blue */
+    --navbar-foreground: 0 0% 100%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 10% 26%;
+    --sidebar-primary: 231 64% 30%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 25% 96%;
+    --sidebar-accent-foreground: 0 0% 13%;
+    --sidebar-border: 220 15% 90%;
+    --sidebar-ring: 231 64% 30%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/75 backdrop-blur-xl border border-blue-100/60 shadow-lg;
+  }
+  .glass-dark {
+    @apply bg-[hsl(var(--primary))]/30 backdrop-blur-xl border border-white/10;
+  }
+  .glass-card {
+    @apply bg-white/85 backdrop-blur-xl border border-blue-100/60 shadow-xl;
+  }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    @apply text-[10px] sm:text-xs uppercase tracking-[0.3em] text-primary font-bold;
+  }
+  .section-title {
+    @apply text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-foreground leading-[0.95];
+  }
+  .accent-dot {
+    @apply inline-block w-2.5 h-2.5 rounded-full bg-secondary ml-1;
+  }
+  .brand-card {
+    @apply bg-card rounded-xl border border-border hover:border-primary/40
+           shadow-[0_4px_20px_-8px_hsl(var(--primary)/0.10)]
+           hover:shadow-[0_18px_40px_-12px_hsl(var(--primary)/0.22)]
+           hover:-translate-y-1 transition-all duration-500;
+  }
+  .marquee-strip {
+    @apply bg-primary text-primary-foreground py-3 overflow-hidden whitespace-nowrap;
+  }
+  .diagonal-section {
+    clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+  }
+
+  /* Tri-color gradient top border for premium cards */
+  .gradient-border-top {
+    position: relative;
+  }
+  .gradient-border-top::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--secondary)) 50%,
+      hsl(var(--accent)) 100%
+    );
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    pointer-events: none;
+  }
+
+  /* Topper highlight: gold ring + soft glow */
+  .topper-ring {
+    position: relative;
+    box-shadow:
+      0 0 0 4px hsl(var(--accent)),
+      0 0 0 6px hsl(var(--background)),
+      0 12px 40px -8px hsl(var(--accent) / 0.45);
+  }
+  .topper-glow {
+    background: radial-gradient(
+      ellipse at center,
+      hsl(var(--accent) / 0.18) 0%,
+      hsl(var(--accent) / 0.04) 45%,
+      transparent 75%
+    );
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      135deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--secondary)) 55%,
+      hsl(var(--accent)) 100%
+    );
+  }
+  .font-display {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+  .font-mono-brand {
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* Subtle academic background pattern: graduation caps + books at ~3% opacity */
+  .bg-academic-pattern {
+    background-color: hsl(var(--background));
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><g fill='none' stroke='%231A237E' stroke-opacity='0.05' stroke-width='1.2'><path d='M20 35l16-7 16 7-16 7-16-7zm16 7v8m-6 0c0 3 3 5 6 5s6-2 6-5'/><rect x='78' y='80' width='22' height='18' rx='1.5'/><path d='M78 80v18M89 80v18M100 80v18'/></g></svg>");
+    background-repeat: repeat;
+  }
+}
